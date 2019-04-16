@@ -4,26 +4,27 @@ var taskTitleInput = document.querySelector('#task-title-input');
 var taskItemInput = document.querySelector('.task-item-input');
 var newTaskItemsSection = document.querySelector('.new-task-items-section');
 var addTaskItemButton = document.querySelector('.add-task-item-button');
-var makeTaskListButton = document.querySelector('.make-task-list-button')
-var deleteCardImage = document.querySelector('.delete-card-img')
-var clearAllButton = document.querySelector('.clear-all-button')
-var filterUrgencyButton = document.querySelector('.filter-urgency-button')
-var searchInput = document.querySelector('.search-input')
-var column1 = document.querySelector('.column-1')
-var column2 = document.querySelector('.column-2')
+var makeTaskListButton = document.querySelector('.make-task-list-button');
+var deleteCardImage = document.querySelector('.delete-card-img');
+var clearAllButton = document.querySelector('.clear-all-button');
+var filterUrgencyButton = document.querySelector('.filter-urgency-button');
+var searchInput = document.querySelector('.search-input');
+var column1 = document.querySelector('.column-1');
+var column2 = document.querySelector('.column-2');
 
-column2.addEventListener('click', changeUrgent)
-addTaskItemButton.addEventListener('click', makeTaskItems)
-makeTaskListButton.addEventListener('click', makeNewTaskList)
-column1.addEventListener('click', removeUncommitedTaskItem)
-column2.addEventListener('click', deleteCard)
-clearAllButton.addEventListener('click', clearAll)
-column2.addEventListener('click', taskItemUpdate)
-column1.addEventListener('keyup', disableTaskListButton)
-taskTitleInput.addEventListener('keyup', enableTaskList)
-filterUrgencyButton.addEventListener('click', filterUrgent)
-retrieveTasks()
-defaultMessage()
+column2.addEventListener('click', changeUrgent);
+addTaskItemButton.addEventListener('click', makeTaskItems);
+makeTaskListButton.addEventListener('click', makeNewTaskList);
+column1.addEventListener('click', removeUncommitedTaskItem);
+column2.addEventListener('click', deleteCard);
+clearAllButton.addEventListener('click', clearAll);
+column2.addEventListener('click', taskItemUpdate);
+column1.addEventListener('keyup', disableTaskListButton);
+taskTitleInput.addEventListener('keyup', enableTaskList);
+filterUrgencyButton.addEventListener('click', filterUrgent);
+searchInput.addEventListener('keyup', searchTasks);
+retrieveTasks();
+defaultMessage();
 
 makeTaskListButton.disabled = true;
 addTaskItemButton.disabled = true;
@@ -35,12 +36,10 @@ function makeNewTaskList(e) {
   newTaskList.saveToLocalStorage()
   removeNewTaskFromDom(e)
   newTaskListCard(newTaskList);
-  // newListItems(newTaskList)
   taskItems =[];
   makeTaskListButton.disabled = true;
   removeDefaultMessage()
 }
-
 
 function newTaskListCard(newTaskList) {
   var urgentImg;
@@ -64,15 +63,15 @@ function newTaskListCard(newTaskList) {
     </article> 
   `)
   if (newTaskList.urgent === true){
-    addClassList('.card', 'urgent-yellow')
-    addClassList('#urgent-card-text', 'urgent-card-text')
-    addClassList('.card-tasks', 'urgent-yellow-borders')
+    addClassList('.card', 'urgent-yellow');
+    addClassList('#urgent-card-text', 'urgent-card-text');
+    addClassList('.card-tasks', 'urgent-yellow-borders');
   } 
 }
 
 function addClassList(targetLocation, classListName) {
-  var location = (document.querySelector(targetLocation))
-  location.classList.add(classListName)
+  var location = (document.querySelector(targetLocation));
+  location.classList.add(classListName);
 }
 
 function newListItems(newTaskList){
@@ -82,8 +81,8 @@ function newListItems(newTaskList){
       `<li> <input type="checkbox" class="list-item-checkbox" data-id="${newTaskList.taskItems[i].id}" 
       id="${newTaskList.taskItems[i].id}" ${newTaskList.taskItems[i].checked ? 'checked' : ''}/>
       <label for="${newTaskList.taskItems[i].id}"">${newTaskList.taskItems[i].item}</label></li>` 
- } 
-  return taskItemsIteration
+  } 
+  return taskItemsIteration;
 }
 
 function removeNewTaskFromDom(e){
@@ -96,8 +95,8 @@ function removeNewTaskFromDom(e){
 
 function findId(e) {
   var targetedCard = e.target.closest(".card");
-  var targetedId = parseInt(targetedCard.getAttribute('data-id'))
-  var taskLocation = tasks.findIndex(i => i.id === targetedId)
+  var targetedId = parseInt(targetedCard.getAttribute('data-id'));
+  var taskLocation = tasks.findIndex(i => i.id === targetedId);
   return taskLocation
 }
 
@@ -109,28 +108,28 @@ function makeTaskItems (e) {
   taskItems.push(newTaskItem);
   taskItemInput.value = "";
   addTaskItemButton.disabled = true;
-  if (taskTitleInput.value.length > 0 ){
-  makeTaskListButton.disabled = false;
+  if (taskTitleInput.value.length > 0 ) {
+    makeTaskListButton.disabled = false;
   }
 }
 
 function removeUncommitedTaskItem(e) {
-  if(e.target.className === "delete-image") {
+  if (e.target.className === "delete-image") {
     var closestLine = e.target.closest(".uncommited-task-line");
-    var indexToBeRemoved = taskItems.indexOf(closestLine.childNodes[1].innerText)
-    taskItems.splice(indexToBeRemoved, 1)
+    var indexToBeRemoved = taskItems.indexOf(closestLine.childNodes[1].innerText);
+    taskItems.splice(indexToBeRemoved, 1);
     closestLine.remove();
   }
 }
 
 function retrieveTasks() {
-  var retrievedTasks = localStorage.getItem("tasks")
-  var parsedTasks = JSON.parse(retrievedTasks)
+  var retrievedTasks = localStorage.getItem("tasks");
+  var parsedTasks = JSON.parse(retrievedTasks);
   for (var i = 0; i < parsedTasks.length; i++) {
-  var newTaskList = new TaskList (parsedTasks[i].id, parsedTasks[i].title, parsedTasks[i].taskItems,  parsedTasks[i].urgent)
-  tasks.push(newTaskList)
-  newTaskListCard(newTaskList)
- }
+    var newTaskList = new TaskList (parsedTasks[i].id, parsedTasks[i].title, parsedTasks[i].taskItems,  parsedTasks[i].urgent);
+    tasks.push(newTaskList);
+    newTaskListCard(newTaskList);
+  }
 }
 
 function deleteCard(e) {
@@ -139,7 +138,7 @@ function deleteCard(e) {
     var key = tasks[taskLocation].taskItems.findIndex(i => i.checked === false)
     if (key === -1) {
     } else {
-    return 
+      return 
     }
     e.target.closest(".card").remove();
     tasks[taskLocation].deleteFromStorage(taskLocation);
@@ -150,7 +149,7 @@ function deleteCard(e) {
 
 function defaultMessage() {
   if(tasks.length === 0){
-    column2.insertAdjacentHTML("afterbegin", `<h1 class="default-message">Add a task!</h1>`)
+    column2.insertAdjacentHTML("afterbegin", `<h1 class="default-message">Add a task!</h1>`);
   }
 }
 function removeDefaultMessage() {
@@ -161,7 +160,7 @@ function removeDefaultMessage() {
 function clearAll(e) {
   if (taskTitleInput.length === 0 && taskItemInput.length === 0) {
     clearAllButton.disabled = true;
-  } else if (e.target === clearAllButton) {
+    } else if (e.target === clearAllButton) {
     taskTitleInput.value = "";
     taskItemInput.value = "";
     makeTaskListButton.disabled = true;
@@ -176,13 +175,13 @@ function clearAll(e) {
 
 function changeUrgent(e) {
   if (e.target.className === 'card-urgent-img'){
-  taskLocation = findId(e);
-  tasks[taskLocation].updateToDo()
-  tasks[taskLocation].saveToLocalStorage()
-  toggleClasses(e.target.closest(".card"), 'urgent-yellow')
-  toggleClasses((e.target.parentNode.childNodes[3]), 'urgent-card-text')
-  toggleClasses((e.target.closest('.card').childNodes[3]), 'urgent-yellow-borders')
-  e.target.src.match("images/urgent.svg") ? e.target.src = "images/urgent-active.svg" : e.target.src = "images/urgent.svg";
+    taskLocation = findId(e);
+    tasks[taskLocation].updateToDo()
+    tasks[taskLocation].saveToLocalStorage()
+    toggleClasses(e.target.closest(".card"), 'urgent-yellow')
+    toggleClasses((e.target.parentNode.childNodes[3]), 'urgent-card-text')
+    toggleClasses((e.target.closest('.card').childNodes[3]), 'urgent-yellow-borders')
+    e.target.src.match("images/urgent.svg") ? e.target.src = "images/urgent-active.svg" : e.target.src = "images/urgent.svg";
   }
 }
 
@@ -204,8 +203,8 @@ function taskItemUpdate(e) {
 
 function disableTaskListButton(e) {
   if (taskItemInput.value.length > 0) {
-  addTaskItemButton.disabled = false;}
-  else if(taskItemInput.value.length === 0) {
+  addTaskItemButton.disabled = false;
+  } else if (taskItemInput.value.length === 0) {
   addTaskItemButton.disabled = true;
   } 
 } 
@@ -222,7 +221,7 @@ function filterUrgent(e) {
   filterUrgencyButton.classList.toggle("filter-urgency-button-active")
   if (e.target.classList.contains("filter-urgency-button-active")) {
   var filterResults = tasks.filter(task => task.urgent === true)
-    } else {
+  } else {
   var filterResults = tasks.filter(task => task.urgent === task.urgent)
   }
   column2.innerHTML = ""
@@ -236,10 +235,9 @@ function searchTasks(e) {
   column2.innerHTML = '';
   for (var i = 0; i < matchingTasks.length; i++){
   newTaskListCard(matchingTasks[i])
-    }
+  }
 }
 
-searchInput.addEventListener('keyup', searchTasks)
 
 
 

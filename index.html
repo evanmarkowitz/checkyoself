@@ -1,41 +1,42 @@
 <!DOCTYPE html>
-<head>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
-  <title>Check Yo'Self</title>
-</head>
-<body>
-  <header class="main-header">
-    <h1>CHECK <span id="h1-yellow-text">YO'</span> SELF</h1>
-    <form>
-      <input class="text-input search-input" type="text" name="search-input">
-    </form>
-  </header>
-  <main>
-    <section class="columns column-1">
-      <form class="make-task-form">
-        <div class="task-title-section">
-          <label for="task-title">Task Title</label>
-          <input class="text-input" type="text" id="task-title-input" name="task-title">
-        </div>
-        <div class="new-task-items-section">
-        </div>
-        <div class="make-task-section">
-          <label for="task-item-input">Task Item</label>
-          <div class="make-task-input-button">
-            <input class="text-input task-item-input" type="text" name="task-item">
-            <button type="button" class="add-task-item-button">+</button>
-          </div>
-          <button type="button" class="column-1-buttons make-task-list-button">Make Task List</button>
-          <button type="button" class="column-1-buttons clear-all-button">Clear All</button> 
-        </div>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
+    <title>Check Yo'Self</title>
+  </head>
+  <body>
+    <header class="main-header">
+      <h1>CHECK <span id="h1-yellow-text">YO'</span> SELF</h1>
+      <form class="search-form">
+        <img src="images/search.svg" class="search-img">
+        <input class="text-input search-input" type="text" name="search-input">
       </form>
-      <button type="button" class="column-1-buttons filter-urgency-button">Filter By Urgency</button> 
-    </section>
-    <section class="columns column-2">
-    </section>
-  </main>
-  <script type="text/javascript" src="task-list.js"></script>
-  <script type="text/javascript" src="main.js"></script>
-</body>
+    </header>
+    <main>
+      <aside class="columns column-1">
+        <form class="make-task-form">
+          <article class="task-title-section">
+            <label for="task-title">Task Title</label>
+            <input class="text-input" type="text" id="task-title-input" name="task-title">
+          </article>
+          <div class="new-task-items-section">
+          </div>
+          <article class="make-task-section">
+            <label for="task-item-input">Task Item</label>
+            <div class="make-task-input-button">
+              <input class="text-input task-item-input" type="text" name="task-item">
+              <button type="button" class="add-task-item-button">+</button>
+            </div>
+            <button type="button" class="column-1-buttons make-task-list-button">Make Task List</button>
+            <button type="button" class="column-1-buttons clear-all-button">Clear All</button> 
+          </article>
+        </form>
+        <button type="button" class="column-1-buttons filter-urgency-button">Filter By Urgency</button> 
+      </aside>
+      <section class="columns column-2">
+      </section>
+    </main>
+    <script type="text/javascript" src="task-list.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+  </body>
 </html>

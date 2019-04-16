@@ -1,16 +1,16 @@
 * {
+  box-sizing: border-box;
   font-family: Open Sans; 
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 .main-header {
+  background-color: #1F1F3D;
   display: flex;
+  height: 60px;
   justify-content: space-between;
   padding: 7px;
-  height: 60px;
-  background-color: #1F1F3D;
 }
 
 header h1 {
@@ -27,25 +27,42 @@ main {
   min-height: 100vw;
 }
 
+.search-form {
+  display: flex;
+  height: 100%;
+  z-index: 4;
+}
+
+.search-img {
+  background: #C7D3D8;
+  border: none;
+  height: 46px;
+  padding: 9px;
+}
+
 .column-1 {
   background-color: #587A8B;
   flex: 1;
   padding: 10px;
 }
+
 .column-2 {
-  flex: 2;
   column-width: 20em; 
+  flex: 2;
   padding: 30px;
 }
 
 .text-input {
-  height: 45px;
   border: 2px solid #1F1F3D;
+  height: 45px;
 }
 
 .search-input {
+  border: none;
+  height: 100%;
   width: 300px;
 }
+
 .task-title-section {
   display: flex;
   flex-direction: column;
@@ -59,15 +76,16 @@ main {
 
 .column-1-buttons {
   background-color: #1F1F3D;
-  width: 100%;
-  color: #FFFFFF;
-  height: 45px;
-  border: none;
   border-radius: 5px;
+  border: none;
+  color: #FFFFFF;
   font-family: inherit;
   font-size: 20px;
+  height: 45px;
   margin: 10px 0;
+  width: 100%;
 }
+
 .column-1 button:disabled {
   background-color: #3C6577;
 }
@@ -86,16 +104,18 @@ main {
 }
 
 .add-task-item-button {
-  height: 45px;
-  width: 45px;
-  font-size: 30px;
-  color: #FFFFFF;
   background-color: #1F1F3D;
   border: none;
+  color: #FFFFFF;
+  font-size: 30px;
+  height: 45px;
+  width: 45px;
 }
+
 .make-task-input-button {
   display: flex;
 }
+
 .task-item-input {
   width: 100%;
 }
@@ -108,49 +128,53 @@ main {
   color: #C7D3D8;
   margin-bottom: 5px;
 }
+
 .uncommited-task-line {
+  align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
-  margin-left: 25px;
   margin-bottom: 15px;
+  margin-left: 25px;
 }
 
 .uncommited-task-items {
+  align-self: center;
   color: #FFFFFF;
   font-size: 18px;
-  align-self: center;
 }
+
 .uncommited-task-button {
-  width: 25px;
-  height: 25px;
   border-radius: 50%;
   font-size: 20px;
+  height: 25px;
   margin-right: 20px;
+  width: 25px;
 }
 
 .delete-image {
+  align-self: baseline;
   height: 22px;
   margin-right: 15px;
-  align-self: baseline;
 }
 
 .card {
-  width:  100%; 
   background-color: #FAFDFF;
   border: solid 2px #C7D3D8;
   box-sizing: border-box;
-  padding: 5px;
+  display: inline-block;
   height: auto;
   margin:  0.25rem;
-  display: inline-block;
+  padding: 5px;
+  width:  100%; 
 }
+
 .card-header,
 .card-footer{
-  min-height: 20px;
   margin-bottom: 5px;
+  min-height: 20px;
 }
+
 .card-header {
   font-size: 20px;
   font-weight: bold;
@@ -167,12 +191,12 @@ main {
 }
 
 .card-tasks {
-  list-style-type: none;
-  border-top: solid 2px #C7D3D8;
   border-bottom: solid 2px #C7D3D8;
+  border-top: solid 2px #C7D3D8;
+  font-size: 18px;
+  list-style-type: none;
   margin: 10px 0;
   padding: 10px 0;
-  font-size: 18px;
 }
 
 .card-tasks input {
@@ -181,13 +205,12 @@ main {
 }
 
 .card-tasks input + label:before {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  content: '';
-  margin-right: 10px;
   background: url(images/checkbox.svg) no-repeat 0 0;
-  
+  content: '';
+  display: inline-block;
+  height: 18px;
+  margin-right: 10px;
+  width: 18px;
 }
 
 .card-tasks input:checked + label:before {
@@ -201,8 +224,8 @@ main {
 .card-footer-sides {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   font-size: 10px;
+  justify-content: center;
 }
 
 .urgent-yellow {
@@ -214,8 +237,8 @@ main {
   color: #B23A25;
 }
 .urgent-yellow-borders {
-  border-top: solid 2px #FFC30C;
   border-bottom: solid 2px #FFC30C;
+  border-top: solid 2px #FFC30C;
 }
 
 
