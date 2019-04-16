@@ -8,6 +8,7 @@ var makeTaskListButton = document.querySelector('.make-task-list-button')
 var deleteCardImage = document.querySelector('.delete-card-img')
 var clearAllButton = document.querySelector('.clear-all-button')
 var filterUrgencyButton = document.querySelector('.filter-urgency-button')
+var searchInput = document.querySelector('.search-input')
 var column1 = document.querySelector('.column-1')
 var column2 = document.querySelector('.column-2')
 
@@ -229,6 +230,16 @@ function filterUrgent(e) {
   newTaskListCard(filterResults[i])
 }}
 
+function searchTasks(e) {
+  var keyword = searchInput.value.toLowerCase();
+  var matchingTasks = tasks.filter(task => task.title.toLowerCase().includes(keyword)) 
+  column2.innerHTML = '';
+  for (var i = 0; i < matchingTasks.length; i++){
+  newTaskListCard(matchingTasks[i])
+    }
+}
+
+searchInput.addEventListener('keyup', searchTasks)
 
 
 
