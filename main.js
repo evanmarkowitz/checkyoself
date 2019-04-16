@@ -7,6 +7,7 @@ var addTaskItemButton = document.querySelector('.add-task-item-button');
 var makeTaskListButton = document.querySelector('.make-task-list-button')
 var deleteCardImage = document.querySelector('.delete-card-img')
 var clearAllButton = document.querySelector('.clear-all-button')
+var filterUrgencyButton = document.querySelector('.filter-urgency-button')
 var column1 = document.querySelector('.column-1')
 var column2 = document.querySelector('.column-2')
 
@@ -19,28 +20,12 @@ clearAllButton.addEventListener('click', clearAll)
 column2.addEventListener('click', taskItemUpdate)
 column1.addEventListener('keyup', disableTaskListButton)
 taskTitleInput.addEventListener('keyup', enableTaskList)
+filterUrgencyButton.addEventListener('click', filterUrgent)
 retrieveTasks()
 defaultMessage()
 
 makeTaskListButton.disabled = true;
 addTaskItemButton.disabled = true;
-
-function disableTaskListButton(e) {
-  if (taskItemInput.value.length > 0) {
-    console.log(taskItemInput.value.length)
-  addTaskItemButton.disabled = false;}
-  else if(taskItemInput.value.length === 0) {
-  addTaskItemButton.disabled = true;
-  } 
-} 
-function enableTaskList(e) {
-  console.log(taskTitleInput.value)
-  if (taskItems.length > 0 && taskTitleInput.value.length > 0) {
-  makeTaskListButton.disabled = false; 
-  } else if (taskTitleInput.value.length >= 0) {
-  makeTaskListButton.disabled = true; 
-  }
-}
 
 
 function makeNewTaskList(e) {
@@ -49,7 +34,7 @@ function makeNewTaskList(e) {
   newTaskList.saveToLocalStorage()
   removeNewTaskFromDom(e)
   newTaskListCard(newTaskList);
-  newListItems(newTaskList)
+  // newListItems(newTaskList)
   taskItems =[];
   makeTaskListButton.disabled = true;
   removeDefaultMessage()
@@ -63,7 +48,7 @@ function newTaskListCard(newTaskList) {
     <article class="card" data-id="${newTaskList.id}">
       <header class="card-header">${newTaskList.title}</header>
         <ul class="card-tasks">
-          ${newListItems(newTaskList)}
+          ${newListItems(newTaskList)} 
         </ul>
         <div class="card-footer">
           <div class="card-footer-sides">
@@ -144,13 +129,18 @@ function retrieveTasks() {
   var newTaskList = new TaskList (parsedTasks[i].id, parsedTasks[i].title, parsedTasks[i].taskItems,  parsedTasks[i].urgent)
   tasks.push(newTaskList)
   newTaskListCard(newTaskList)
-}
+ }
 }
 
 function deleteCard(e) {
   if (e.target.className === "delete-card-img") {
-    e.target.closest(".card").remove();
     var taskLocation = findId(e)
+    var key = tasks[taskLocation].taskItems.findIndex(i => i.checked === false)
+    if (key === -1) {
+    } else {
+    return 
+    }
+    e.target.closest(".card").remove();
     tasks[taskLocation].deleteFromStorage(taskLocation);
     var stringifiedTasks = JSON.stringify(tasks);
     localStorage.setItem('tasks', stringifiedTasks)
@@ -174,6 +164,7 @@ function clearAll(e) {
     taskTitleInput.value = "";
     taskItemInput.value = "";
     makeTaskListButton.disabled = true;
+    addTaskItemButton.disabled = true;
     var uncommitedTasks = document.querySelectorAll(".uncommited-task-line");
     taskItems =[];
     uncommitedTasks.forEach(function(element) {
@@ -181,7 +172,6 @@ function clearAll(e) {
   })
   }
 }
-
 
 function changeUrgent(e) {
   if (e.target.className === 'card-urgent-img'){
@@ -210,6 +200,37 @@ function taskItemUpdate(e) {
     tasks[taskLocation].saveToLocalStorage();
   }
 }
+
+function disableTaskListButton(e) {
+  if (taskItemInput.value.length > 0) {
+  addTaskItemButton.disabled = false;}
+  else if(taskItemInput.value.length === 0) {
+  addTaskItemButton.disabled = true;
+  } 
+} 
+
+function enableTaskList(e) {
+  if (taskItems.length > 0 && taskTitleInput.value.length > 0) {
+  makeTaskListButton.disabled = false; 
+  } else if (taskTitleInput.value.length >= 0) {
+  makeTaskListButton.disabled = true; 
+  }
+}
+
+function filterUrgent(e) {
+  filterUrgencyButton.classList.toggle("filter-urgency-button-active")
+  if (e.target.classList.contains("filter-urgency-button-active")) {
+  var filterResults = tasks.filter(task => task.urgent === true)
+    } else {
+  var filterResults = tasks.filter(task => task.urgent === task.urgent)
+  }
+  column2.innerHTML = ""
+  for (var i = 0; i < filterResults.length; i++){
+  newTaskListCard(filterResults[i])
+}}
+
+
+
 
 
 
