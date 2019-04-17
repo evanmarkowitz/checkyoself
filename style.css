@@ -252,6 +252,7 @@ main{
 }
 
 @media only screen and (max-width: 650px){
+
 main{
   display: block;
 }
@@ -259,27 +260,30 @@ main{
   display: flex;
   justify-content: space-between;
 }
+
 .column-1 {
   padding: 10px;
 }
+
 .column-2 {
   box-sizing: border-box;
   padding: 0 10px 10px 10px;
 }
+
 .search-input  {
   display: none;
 }
 
 .search-input-display {
+  box-sizing: content-box;
   display: inline;
+  height: 250px; 
+  left: 0;
+  margin: 0;
+  padding: 0 5px;
   position: absolute;
   top: 0;
-  left: 0;
   width: 100%;
-  box-sizing: content-box;
-  padding: 0 5px;
-  margin: 0;
-  height: 250px; 
   z-index: 1;
 }
 
@@ -288,12 +292,11 @@ main{
   width: 50px;
   z-index: 2;
 }
-.search-img:
 
 .card {
-  width: 100%;
   display: block;
   margin: 10px 0 0 0;
+  width: 100%;
 }
 
 }
