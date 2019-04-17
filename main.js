@@ -9,6 +9,7 @@ var deleteCardImage = document.querySelector('.delete-card-img');
 var clearAllButton = document.querySelector('.clear-all-button');
 var filterUrgencyButton = document.querySelector('.filter-urgency-button');
 var searchInput = document.querySelector('.search-input');
+var searchButton = document.querySelector('.search-img')
 var column1 = document.querySelector('.column-1');
 var column2 = document.querySelector('.column-2');
 
@@ -23,6 +24,7 @@ column1.addEventListener('keyup', disableTaskListButton);
 taskTitleInput.addEventListener('keyup', enableTaskList);
 filterUrgencyButton.addEventListener('click', filterUrgent);
 searchInput.addEventListener('keyup', searchTasks);
+
 retrieveTasks();
 defaultMessage();
 
@@ -237,6 +239,12 @@ function searchTasks(e) {
   newTaskListCard(matchingTasks[i])
   }
 }
+
+function displaySearchMbl(e){
+  toggleClasses(searchInput, 'search-input-display')
+}
+
+searchButton.addEventListener('click', displaySearchMbl)
 
 
 

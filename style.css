@@ -257,7 +257,7 @@ main{
 }
 .main-header {
   display: flex;
-  justify-content: center
+  justify-content: space-between;
 }
 .column-1 {
   padding: 10px;
@@ -266,9 +266,30 @@ main{
   box-sizing: border-box;
   padding: 0 10px 10px 10px;
 }
-.search-form  {
+.search-input  {
   display: none;
 }
+
+.search-input-display {
+  display: inline;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: content-box;
+  padding: 0 5px;
+  margin: 0;
+  height: 250px; 
+  z-index: 1;
+}
+
+.search-img {
+  margin-right: 5px;
+  width: 50px;
+  z-index: 2;
+}
+.search-img:
+
 .card {
   width: 100%;
   display: block;
