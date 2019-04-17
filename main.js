@@ -24,6 +24,7 @@ column1.addEventListener('keyup', disableTaskListButton);
 taskTitleInput.addEventListener('keyup', enableTaskList);
 filterUrgencyButton.addEventListener('click', filterUrgent);
 searchInput.addEventListener('keyup', searchTasks);
+searchButton.addEventListener('click', displaySearchMbl)
 
 retrieveTasks();
 defaultMessage();
@@ -163,16 +164,20 @@ function clearAll(e) {
   if (taskTitleInput.length === 0 && taskItemInput.length === 0) {
     clearAllButton.disabled = true;
     } else if (e.target === clearAllButton) {
-    taskTitleInput.value = "";
-    taskItemInput.value = "";
-    makeTaskListButton.disabled = true;
-    addTaskItemButton.disabled = true;
+    clearDom()
     var uncommitedTasks = document.querySelectorAll(".uncommited-task-line");
     taskItems =[];
     uncommitedTasks.forEach(function(element) {
     element.remove();
   })
   }
+}
+
+function clearDom() {
+  taskTitleInput.value = "";
+  taskItemInput.value = "";
+  makeTaskListButton.disabled = true;
+  addTaskItemButton.disabled = true;
 }
 
 function changeUrgent(e) {
@@ -244,7 +249,7 @@ function displaySearchMbl(e){
   toggleClasses(searchInput, 'search-input-display')
 }
 
-searchButton.addEventListener('click', displaySearchMbl)
+
 
 
 
